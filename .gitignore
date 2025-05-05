@@ -1,0 +1,12 @@
+FER2013/train
+FER2013/test
+FER2013/train/*/*
+FER2013/test/*/*
+logs/
+checkpoints/
+pretrained/
+.ipynb_checkpoints/
+.DS_Store
+__pycache__/
+
+
