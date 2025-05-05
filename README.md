@@ -82,7 +82,7 @@ pip install torch torchvision matplotlib sklearn jupyter tensorboard
 ## 解压数据集
 ```
 cd FER2013
-unzip archives.zip
+unzip archive.zip
 cd ..  
 ```
 
