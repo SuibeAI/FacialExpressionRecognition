@@ -15,7 +15,7 @@ from sklearn.metrics import confusion_matrix
 # -----------------------------
 # 可视化函数
 # -----------------------------
-def plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_losses, epoch=None):
+def plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_losses):
     plt.figure()
     plt.plot(train_accuracies, label="Train Acc")
     plt.plot(val_accuracies, label="Val Acc")
@@ -41,8 +41,6 @@ def plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_lo
 # -----------------------------
 # 评估函数
 # -----------------------------
-
-
 def evaluate_model(model, val_loader, criterion, device):
     model.eval()
     correct, total = 0, 0
@@ -102,7 +100,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, device, l
 
         train_loss = running_loss / len(train_loader)
         train_acc = 100 * correct / total
-        val_acc, val_loss, cm = evaluate_model(model, val_loader, criterion, device)
+        val_acc, val_loss, _ = evaluate_model(model, val_loader, criterion, device)
 
         train_losses.append(train_loss)
         val_losses.append(val_loss)
@@ -118,7 +116,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, device, l
               f"Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f} - "
               f"Train Acc: {train_acc:.2f}%, Val Acc: {val_acc:.2f}%")
 
-        plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_losses, epoch)
+        plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_losses)
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
