@@ -51,7 +51,7 @@ FER2013/
 │       ├── accuracy_plot.png
 │       └── ...
 ├── pretrained/            # 预训练模型权重
-│   ├── resnet18-5c106cde.pth
+│   ├── resnet18-f37072fd.pth
 │   └── resnet50-0676ba61.pth
 ├── scripts/               # 训练脚本
 │   ├── train_resnet18_pretrained.sh
@@ -107,7 +107,7 @@ python train.py --model_type simplecnn --image_size 48 --num_input_channels 1
 使用ResNet18训练:
 
 ```bash
-python train.py --model_type resnet18 --image_size 224 --num_input_channels 3 --pretrained_path ./pretrained/resnet18-5c106cde.pth
+python train.py --model_type resnet18 --image_size 224 --num_input_channels 3 --pretrained_path ./pretrained/resnet18-f37072fd.pth
 ```
 
 也可以使用提供的脚本:
