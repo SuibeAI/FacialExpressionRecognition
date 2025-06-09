@@ -16,6 +16,14 @@ from sklearn.metrics import confusion_matrix
 # 可视化函数
 # -----------------------------
 def plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_losses):
+    """绘制训练和验证的准确率和损失曲线，并保存到指定目录
+    Args:
+        log_dir (str): 日志目录，用于保存图像
+        train_accuracies (list): 训练准确率列表
+        val_accuracies (list): 验证准确率列表
+        train_losses (list): 训练损失列表
+        val_losses (list): 验证损失列表 
+    """
     plt.figure()
     plt.plot(train_accuracies, label="Train Acc")
     plt.plot(val_accuracies, label="Val Acc")
@@ -42,6 +50,17 @@ def plot_metrics(log_dir, train_accuracies, val_accuracies, train_losses, val_lo
 # 评估函数
 # -----------------------------
 def evaluate_model(model, val_loader, criterion, device):
+    """评估模型在验证集上的性能
+    Args:
+        model (nn.Module): 训练好的模型
+        val_loader (DataLoader): 验证集数据加载器
+        criterion (nn.Module): 损失函数
+        device (torch.device): 设备（CPU或GPU）
+    Returns:
+        accuracy (float): 验证集准确率
+        avg_loss (float): 平均损失
+        cm (np.ndarray): 混淆矩阵
+    """
     model.eval()
     correct, total = 0, 0
     total_loss = 0.0
@@ -72,6 +91,20 @@ def evaluate_model(model, val_loader, criterion, device):
 # 训练函数
 # -----------------------------
 def train_model(model, train_loader, val_loader, criterion, optimizer, device, log_dir, model_save_path, num_epochs=30, patience=5):
+    """
+    训练模型并在验证集上评估性能，使用TensorBoard记录训练过程
+    Args:
+        model (nn.Module): 训练的模型
+        train_loader (DataLoader): 训练集数据加载器
+        val_loader (DataLoader): 验证集数据加载器
+        criterion (nn.Module): 损失函数
+        optimizer (torch.optim.Optimizer): 优化器
+        device (torch.device): 设备（CPU或GPU）
+        log_dir (str): TensorBoard日志目录
+        model_save_path (str): 模型保存路径
+        num_epochs (int): 训练轮数
+        patience (int): 早停策略的耐心值
+    """
     writer = SummaryWriter(log_dir)
     best_val_loss = float('inf')
     epochs_no_improve = 0
